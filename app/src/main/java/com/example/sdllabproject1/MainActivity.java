@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void openactivity1()
     {
-       // Intent intent=new Intent(this,adminpage.class);
-       // startActivity(intent);
+        Intent intent=new Intent(this,adminpage.class);
+        startActivity(intent);
     }
     public void openactivity2()
     {
