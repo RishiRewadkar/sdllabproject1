@@ -9,6 +9,12 @@ public class projectTitles {
         this.lead = lead;
         this.stat = stat;
     }
+    public projectTitles(String dname,String desc) {
+        this.dname = dname;
+        this.desc = desc;
+        lead = "hi";
+        stat = "hey";
+    }
 
     public String getDname() {
         return dname;

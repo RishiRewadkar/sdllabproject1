@@ -3,6 +3,8 @@ package com.example.sdllabproject1;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -64,5 +66,24 @@ public class admin1 extends AppCompatActivity {
         adapter.addFragment(new admin_fragment2(),"Upcoming");
         adapter.addFragment(new admin_fragment3(),"Done");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_add_post: {
+                finish();
+                startActivity(new Intent(this, addProjectForm.class));
+                break;
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

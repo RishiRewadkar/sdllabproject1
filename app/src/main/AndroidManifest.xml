@@ -12,11 +12,13 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".viewEOD" />
+        <activity android:name=".adminMenu"/>
         <activity android:name=".employee1" />
         <activity android:name=".admin1" />
         <activity android:name=".adminpage" />
         <activity android:name=".employeepage" />
         <activity android:name=".addProjectForm" />
+        <activity android:name=".adminEOD" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

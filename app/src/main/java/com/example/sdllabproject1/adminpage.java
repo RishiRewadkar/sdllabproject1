@@ -51,7 +51,7 @@ public class adminpage extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {*/
 
-                                    Intent intent=new Intent(adminpage.this,admin1.class);
+                                    Intent intent=new Intent(adminpage.this,adminMenu.class);
                                     startActivity(intent);
 
                                /* } else {

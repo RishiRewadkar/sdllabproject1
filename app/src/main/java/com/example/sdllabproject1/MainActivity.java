@@ -41,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent=new Intent(this,adminpage.class);
         startActivity(intent);
+
+
+
+
+
     }
     public void openactivity2()
     {
