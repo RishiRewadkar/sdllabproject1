@@ -11,8 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".login"></activity>
+        <activity android:name=".signin" />
         <activity android:name=".viewEOD" />
-        <activity android:name=".adminMenu"/>
+        <activity android:name=".adminMenu" />
         <activity android:name=".employee1" />
         <activity android:name=".admin1" />
         <activity android:name=".adminpage" />

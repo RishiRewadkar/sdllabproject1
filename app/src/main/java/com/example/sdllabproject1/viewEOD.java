@@ -52,7 +52,6 @@ public class viewEOD extends AppCompatActivity {
                 });
 
 
-
     }
 }
 /*
