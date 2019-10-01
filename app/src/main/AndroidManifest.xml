@@ -12,7 +12,8 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".login"></activity>
-        <activity android:name=".signin" />
+        <activity android:name=".ManagerActivity" />
+        <activity android:name=".AssignTasksActivity" />
         <activity android:name=".viewEOD" />
         <activity android:name=".adminMenu" />
         <activity android:name=".employee1" />

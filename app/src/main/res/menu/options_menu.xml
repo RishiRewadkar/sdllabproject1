@@ -13,5 +13,9 @@
         android:title="Delete"
         app:showAsAction="always"
         android:icon="@drawable/ic_add_white"/>
-
+    <item
+        android:id="@+id/action_assign"
+        android:icon="@drawable/ic_add_white"
+        android:title="Assign"
+        app:showAsAction="always" />
 </menu>
