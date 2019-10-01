@@ -23,7 +23,6 @@
                 android:id="@+id/proName"
                 android:layout_width="match_parent"
                 android:layout_height="42dp"
-                android:layout_alignParentTop="true"
                 android:layout_marginTop="28dp"
                 android:textSize="18sp" />
 
@@ -55,10 +54,18 @@
                 android:hint="Project Leader"
                 android:inputType="textPersonName" />
 
+            <Button
+                android:id="@+id/DatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Date" />
+
             <Spinner
                 android:id="@+id/status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
 
             <TextView
                 android:id="@+id/Submit"
@@ -69,6 +76,8 @@
                 android:text="Next->"
                 android:textAlignment="center"
                 android:textSize="25sp" />
+
+
 
         </LinearLayout>
 

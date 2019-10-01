@@ -1,7 +1,20 @@
 package com.example.sdllabproject1;
 
 public class ProjectDetails {
-    String Description,Status,TeamLead,Title;
+    String Description;
+    String Status;
+    String TeamLead;
+    String Title;
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
+    }
+
+    String Date;
 
     public String getDescription() {
         return Description;

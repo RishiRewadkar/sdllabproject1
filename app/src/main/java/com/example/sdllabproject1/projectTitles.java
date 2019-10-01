@@ -1,13 +1,14 @@
 package com.example.sdllabproject1;
 
 public class projectTitles {
-    private String dname,desc,lead,stat;
+    private String dname,desc,lead,stat,date;
 
-    public projectTitles(String dname,String desc, String lead, String stat) {
+    public projectTitles(String dname,String desc, String lead, String stat,String date) {
         this.dname = dname;
         this.desc = desc;
         this.lead = lead;
         this.stat = stat;
+        this.date = date;
     }
     public projectTitles(String dname,String desc) {
         this.dname = dname;
@@ -46,5 +47,13 @@ public class projectTitles {
 
     public void setDname(String dname) {
         this.dname = dname;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

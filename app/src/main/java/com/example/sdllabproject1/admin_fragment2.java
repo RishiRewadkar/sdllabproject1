@@ -41,7 +41,6 @@ public class admin_fragment2 extends Fragment {
     List<String> list;
     String b;
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -58,7 +57,7 @@ public class admin_fragment2 extends Fragment {
                     for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                         ProjectDetails pd = documentSnapshot.toObject(ProjectDetails.class);
                         if(pd.getStatus().equals("Upcoming"))
-                        projectList.add(new projectTitles(pd.getTitle(),pd.getDescription(),pd.getTeamLead(),pd.getStatus()));
+                        projectList.add(new projectTitles(pd.getTitle(),pd.getDescription(),pd.getTeamLead(),pd.getStatus(),pd.getDate()));
 
                     }
                     LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -69,10 +68,6 @@ public class admin_fragment2 extends Fragment {
                 }
             });
         Log.d("lips4t", "onCreateView: "+projectList);
-
-
-
-
-return view;
+        return view;
     }
 }

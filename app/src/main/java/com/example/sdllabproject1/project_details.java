@@ -2,17 +2,25 @@ package com.example.sdllabproject1;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
+import android.content.IntentSender;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
@@ -43,11 +51,13 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         holder.setIsRecyclable(false);
+        projectTitles item=pro_title.get(position);
+        holder.title.setTag(item);
         TextView name = holder.title;
         name.setText(pro_title.get(position).getDname());
         holder.desc.setText(pro_title.get(position).getDesc());
         holder.lead.setText(pro_title.get(position).getLead());
-        holder.stat.setText(pro_title.get(position).getStat());
+        holder.stat.setText(pro_title.get(position).getDate());
 
         final boolean isExpanded = expandState.get(position);
         holder.expandableLayout.setVisibility(isExpanded?View.VISIBLE:View.GONE);
@@ -59,6 +69,49 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
                 onClickButton(holder.expandableLayout, holder.buttonLayout,  position);
             }
         });
+
+        holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(mContext, holder.buttonViewOption);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.options_menu);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                      //  projectTitles cards=(projectTitles) view.getTag();
+                      //  final String value = cards.getDname();
+
+                        switch (item.getItemId()) {
+                            case R.id.action_edit:
+                                Intent intent = new Intent(view.getContext(), addProjectForm.class);
+                              //  intent.putExtra("boolea", value);
+                              //  intent.putExtra("title",pro_title.get(position).getDname());
+                                mContext.startActivity(intent);
+                                return true;
+                            case R.id.action_delete:
+                                FirebaseFirestore.getInstance().collection("Project").document(pro_title.get(position).getDname()).delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(mContext,"Deleted!",Toast.LENGTH_LONG);
+
+                                            }
+                                        });
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                //displaying the popup
+                popup.show();
+
+            }
+        });
     }
 
     @Override
@@ -67,7 +120,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView title,desc,lead,stat;
+        TextView title,desc,lead,stat,buttonViewOption;
         public RelativeLayout buttonLayout;
         public LinearLayout expandableLayout;
         public ViewHolder(@NonNull View itemView) {
@@ -77,6 +130,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
             desc = itemView.findViewById(R.id.tv_desc);
             lead = itemView.findViewById(R.id.tv_lead);
             stat = itemView.findViewById(R.id.tv_status);
+            buttonViewOption=itemView.findViewById(R.id.textViewOptions);
 
             expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout);
             buttonLayout = (RelativeLayout) itemView.findViewById(R.id.button);

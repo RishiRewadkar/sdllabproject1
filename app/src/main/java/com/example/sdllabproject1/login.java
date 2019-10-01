@@ -6,15 +6,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class login extends AppCompatActivity {
     EditText email,password;
@@ -47,14 +53,36 @@ public class login extends AppCompatActivity {
                     return;
                 }
 
-
                 firebaseAuth.signInWithEmailAndPassword(username, epassword)
                         .addOnCompleteListener(login.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Intent intent=new Intent(login.this,admin1.class);
-                                    startActivity(intent);
+                                    FirebaseFirestore.getInstance().collection("USERS").document(firebaseAuth.getCurrentUser().getEmail())
+                                            .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    final ModelUsers md = task.getResult().toObject(ModelUsers.class);
+                                                    Log.d("desigmd", "onComplete: "+md.getRole());
+                                                    String desig = md.getRole();
+
+                                                    switch(desig){
+                                                        case "Admin":
+                                                            Intent intent=new Intent(login.this,admin1.class);
+                                                            startActivity(intent);
+                                                            break;
+                                                        case "Manager":
+                                                            Intent intent2=new Intent(login.this,MainActivity.class);
+                                                            startActivity(intent2);
+                                                            break;
+                                                        case "Employee":
+                                                            Intent intent3=new Intent(login.this,employee1.class);
+                                                            startActivity(intent3);
+                                                            break;
+
+                                                    }
+                                                }
+                                            });
                                 } else {
                                     Toast.makeText(login.this, "Authentication failed.",
                                             Toast.LENGTH_SHORT).show();

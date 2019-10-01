@@ -30,7 +30,6 @@ public class admin1 extends AppCompatActivity {
         viewPager = findViewById(R.id.container);
         setupViewPager(viewPager);
 
-
         TabLayout tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
@@ -41,25 +40,11 @@ public class admin1 extends AppCompatActivity {
                 setAddProject();
             }
         });
-/*
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        //navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);*/
     }
-
-
-
     public void setAddProject(){
         Intent intent = new Intent(this,addProjectForm.class);
         startActivity(intent);
     }
-
     private void setupViewPager(ViewPager viewPager){
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
         adapter.addFragment(new admin_fragment(),"Ongoing");
@@ -67,14 +52,12 @@ public class admin1 extends AppCompatActivity {
         adapter.addFragment(new admin_fragment3(),"Done");
         viewPager.setAdapter(adapter);
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
         switch (id) {
             case R.id.action_add_post: {
@@ -83,7 +66,6 @@ public class admin1 extends AppCompatActivity {
                 break;
             }
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

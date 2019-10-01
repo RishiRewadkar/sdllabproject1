@@ -94,10 +94,12 @@ public class MainActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(MainActivity.this, "Registered SUccessfully", Toast.LENGTH_SHORT).show();
-
+                    Intent intent = new Intent(MainActivity.this,login.class);
+                    finish();
+                    startActivity(intent);
                 } else {
                     Toast.makeText(MainActivity.this, "Could not register please try again", Toast.LENGTH_SHORT).show();
-
+                    Intent intent = new Intent(MainActivity.this,MainActivity.class);
                 }
             }
 
@@ -105,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         Map<String ,Object> usermap=new HashMap<>();
         usermap.put("UserName",username);
         usermap.put("Role",task);
-       FS.collection("USERS").document(FA.getCurrentUser().getEmail().toString()).set(usermap);
+       FS.collection("USERS").document(username).set(usermap);
 
     }
 

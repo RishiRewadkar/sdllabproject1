@@ -32,7 +32,17 @@ card_view:cardCornerRadius="5dp">
                 android:layout_marginTop="5dp"
 
                 />
-            <RelativeLayout
+                <TextView
+                    android:id="@+id/textViewOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:text="&#8942;"
+                    android:textAppearance="?android:textAppearanceLarge" />
+
+                <RelativeLayout
                 android:id="@+id/button"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
@@ -45,6 +55,7 @@ card_view:cardCornerRadius="5dp">
                     android:background="@drawable/dropdown" />
             </RelativeLayout>
             </RelativeLayout>
+
 
             <LinearLayout
                 android:id="@+id/expandableLayout"

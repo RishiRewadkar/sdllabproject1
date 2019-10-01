@@ -45,7 +45,7 @@ public class admin_fragment3 extends Fragment {
                 for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
                     ProjectDetails pd = documentSnapshot.toObject(ProjectDetails.class);
                     if(pd.getStatus().equals("Done"))
-                        projectList.add(new projectTitles(pd.getTitle(),pd.getDescription(),pd.getTeamLead(),pd.getStatus()));
+                        projectList.add(new projectTitles(pd.getTitle(),pd.getDescription(),pd.getTeamLead(),pd.getStatus(),pd.getDate()));
 
                 }
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
