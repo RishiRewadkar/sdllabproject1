@@ -11,7 +11,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".login"></activity>
+        <activity android:name=".newnoteactivity" android:parentActivityName=".smartui"/>
+        <activity android:name=".smartui"
+            android:launchMode="singleTop"/>
+        <activity android:name=".login" />
+
+
         <activity android:name=".ManagerActivity" />
         <activity android:name=".AssignTasksActivity" />
         <activity android:name=".viewEOD" />
