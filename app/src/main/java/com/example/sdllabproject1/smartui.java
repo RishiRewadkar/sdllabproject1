@@ -11,15 +11,24 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class smartui extends AppCompatActivity {
     private FirebaseFirestore db=FirebaseFirestore.getInstance();
+    private FirebaseAuth FA=FirebaseAuth.getInstance();
+    ArrayList<note> list;
     private noteadapter adapter;
-    private CollectionReference NBR=db.collection("notebook");
+    private CollectionReference NBR=db.collection("USERS");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,10 +44,11 @@ public class smartui extends AppCompatActivity {
     }
     private void  setuprecyclerview()
     {
-        Query query=NBR.orderBy("priority",Query.Direction.DESCENDING);
-        FirestoreRecyclerOptions<note> options=new FirestoreRecyclerOptions.Builder<note>().setQuery(query,note.class).build();
+        Query query=NBR.document(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()).collection("EOD").orderBy("Date");
+       FirestoreRecyclerOptions<note> options=new FirestoreRecyclerOptions.Builder<note>().setQuery(query,note.class).build();
+
+                RecyclerView recyclerView=findViewById(R.id.recycler_view);
         adapter=new noteadapter(options);
-        RecyclerView recyclerView=findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);

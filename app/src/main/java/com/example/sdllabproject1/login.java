@@ -76,7 +76,7 @@ public class login extends AppCompatActivity {
                                                             startActivity(intent2);
                                                             break;
                                                         case "Employee":
-                                                            Intent intent3=new Intent(login.this,employee1.class);
+                                                            Intent intent3=new Intent(login.this,smartui.class);
                                                             startActivity(intent3);
                                                             break;
 

@@ -72,8 +72,8 @@ public class newnoteactivity extends AppCompatActivity {
         map.put("Description",description);
         map.put("Title",title);
         CollectionReference notebookref= FirebaseFirestore.getInstance().collection("USERS");
-        notebookref.document(fa.getCurrentUser().getEmail().toString()).set(map);
-        notebookref.add(new note(title,description,priority));
+        notebookref.document(fa.getCurrentUser().getEmail().toString()).collection("EOD").document(date).set(map);
+     //   notebookref.add(new note(title,description,priority));
         Toast.makeText(newnoteactivity.this,"note added",Toast.LENGTH_SHORT).show();
         finish();
     }

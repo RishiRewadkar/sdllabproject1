@@ -1,29 +1,41 @@
 package com.example.sdllabproject1;
 
 public class note {
-    private String title;
-    private String description;
-    private int priority;
+    private String Title;
+    private String Description;
+    private String Date;
 
     public note()
     {}
 
 
-    public note(String title,String description,int priority){
-            this.title=title;
-            this.description=description;
-            this.priority=priority;
+    public note(String Title,String Description,String Date){
+            this.Date=Title;
+            this.Description=Description;
+            this.Date = Date;
     };
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
-    public int getPriority() {
-        return priority;
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String date) {
+        Date = date;
     }
 }
