@@ -3,18 +3,26 @@ package com.example.sdllabproject1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 public class newnoteactivity extends AppCompatActivity {
@@ -22,20 +30,50 @@ public class newnoteactivity extends AppCompatActivity {
     private EditText editTextDescription;
     private NumberPicker numberPickerpriority;
     FirebaseAuth fa;
+    String date;
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TextView mdisplaydate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newnoteactivity);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("MAKE EOD REPORT");
+        mdisplaydate=(TextView) findViewById(R.id.datepick);
+        mdisplaydate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal=Calendar.getInstance();
+                int year=cal.get(Calendar.YEAR);
+                int month=cal.get(Calendar.MONTH);
+                int day=cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog =new DatePickerDialog(
+                        newnoteactivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        mDateSetListener,year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
-        numberPickerpriority = findViewById(R.id.number_picker_priorty);
 
-        numberPickerpriority.setMinValue(1);
-        numberPickerpriority.setMaxValue(9);
+
+
 
         fa = FirebaseAuth.getInstance();
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                month = month+1;
+                //Log.d(TAG,"OnDateSet: mm/dd/yyyy: "+ month +"/"+day+"/"+year);
+                date = month + "-"+ day + "-"+ year;
+                mdisplaydate.setText(date);
+
+            }
+        };
     }
 
     @Override
@@ -60,8 +98,6 @@ public class newnoteactivity extends AppCompatActivity {
     {
         String title=editTextTitle.getText().toString();
         String description=editTextDescription.getText().toString();
-        int priority=numberPickerpriority.getValue();
-        String date = "01-10-2019";
         if(title.trim().isEmpty()||description.trim().isEmpty())
         {
             Toast.makeText(newnoteactivity.this,"Please enter title and description",Toast.LENGTH_SHORT).show();

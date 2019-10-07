@@ -20,8 +20,6 @@ public class adminEOD extends AppCompatActivity {
 
     RecyclerView recyclerView;
     public ArrayList<projectTitles> eodList;
-
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.admin_read_eod);
