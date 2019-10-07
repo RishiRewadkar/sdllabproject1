@@ -16,6 +16,9 @@
             android:launchMode="singleTop"/>
         <activity android:name=".login" />
 
+
+        <activity android:name=".ManagerActivity" />
+        <activity android:name=".AssignTasksActivity" />
         <activity android:name=".viewEOD" />
         <activity android:name=".adminMenu" />
         <activity android:name=".employee1" />

@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
@@ -102,6 +103,10 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
                                             }
                                         });
                                 return true;
+                            case R.id.action_assign:
+                                Intent intent1 = new Intent(view.getContext(), AssignTasksActivity.class);
+                                mContext.startActivity(intent1);
+                                return true;
                             default:
                                 return false;
                         }
@@ -123,6 +128,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
         TextView title,desc,lead,stat,buttonViewOption;
         public RelativeLayout buttonLayout;
         public LinearLayout expandableLayout;
+        Button but;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -131,7 +137,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
             lead = itemView.findViewById(R.id.tv_lead);
             stat = itemView.findViewById(R.id.tv_status);
             buttonViewOption=itemView.findViewById(R.id.textViewOptions);
-
+            but = itemView.findViewById(R.id.selectButton);
             expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout);
             buttonLayout = (RelativeLayout) itemView.findViewById(R.id.button);
 
