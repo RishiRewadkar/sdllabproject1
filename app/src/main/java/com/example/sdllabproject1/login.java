@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -25,6 +26,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 public class login extends AppCompatActivity {
     EditText email,password;
     Button login;
+    private TextView signup;
+
     private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,7 @@ public class login extends AppCompatActivity {
         password=(EditText) findViewById(R.id.passwordadmin);
         login=(Button)findViewById(R.id.loginadmin);
         firebaseAuth = FirebaseAuth.getInstance();
+        signup=(TextView)findViewById(R.id.textView2);
         login.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -76,7 +80,7 @@ public class login extends AppCompatActivity {
                                                             startActivity(intent2);
                                                             break;
                                                         case "Employee":
-                                                            Intent intent3=new Intent(login.this,smartui.class);
+                                                            Intent intent3=new Intent(login.this,employeepage.class);
                                                             startActivity(intent3);
                                                             break;
 
@@ -93,5 +97,17 @@ public class login extends AppCompatActivity {
 
             }
         });
+
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openactivity5();
+            }
+        });
+    }
+    public void openactivity5()
+    {
+        Intent intent=new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 }

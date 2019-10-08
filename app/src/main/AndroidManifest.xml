@@ -14,7 +14,12 @@
         <activity android:name=".newnoteactivity" android:parentActivityName=".smartui"/>
         <activity android:name=".smartui"
             android:launchMode="singleTop"/>
-        <activity android:name=".login" />
+        <activity android:name=".login" >
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter></activity>
 
 
         <activity android:name=".ManagerActivity" />
@@ -28,11 +33,7 @@
         <activity android:name=".addProjectForm" />
         <activity android:name=".adminEOD" />
         <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

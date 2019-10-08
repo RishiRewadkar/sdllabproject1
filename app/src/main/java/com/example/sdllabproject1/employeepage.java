@@ -18,55 +18,36 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class employeepage extends AppCompatActivity {
     EditText email,password;
-    Button login;
+    Button myeod,neweod,task;
     private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employeepage);
-        getSupportActionBar().setTitle("Employeelogin login");
-        email=(EditText) findViewById(R.id.emailadmin);
-        password=(EditText) findViewById(R.id.passwordadmin);
-        login=(Button)findViewById(R.id.loginadmin);
-        firebaseAuth = FirebaseAuth.getInstance();
-        login.setOnClickListener(new View.OnClickListener() {
+        myeod = findViewById(R.id.myeod);
+        neweod = findViewById(R.id.neweod);
+        task = findViewById(R.id.task);
 
-
-
+        myeod.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username=email.getText().toString().trim();
-                String epassword=password.getText().toString().trim();
-              //  Intent intent=new Intent(employeepage.this,viewEOD.class);
-                //startActivity(intent);
-
-                if(TextUtils.isEmpty(username))
-                {
-                    Toast.makeText(employeepage.this,"Please Enter Email ID",Toast.LENGTH_LONG);
-                    return;
-                }
-                if(TextUtils.isEmpty(epassword))
-                {
-                    Toast.makeText(employeepage.this,"Please Enter Password",Toast.LENGTH_LONG);
-                    return;
-                }
-                firebaseAuth.signInWithEmailAndPassword(username, epassword)
-                        .addOnCompleteListener(employeepage.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-
-                                    Intent intent=new Intent(employeepage.this,viewEOD.class);
-                                    startActivity(intent);
-
-                                } else {
-                                    Toast.makeText(employeepage.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                        });
-
+                Intent intent1 = new Intent(employeepage.this,smartui.class);
+                startActivity(intent1);
+            }
+        });
+        neweod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(employeepage.this,newnoteactivity.class);
+                startActivity(intent1);
+            }
+        });
+        task.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent1 = new Intent(employeepage.this,adminMenu.class);
+                startActivity(intent1);
             }
         });
     }

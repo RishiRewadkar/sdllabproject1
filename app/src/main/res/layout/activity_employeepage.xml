@@ -13,28 +13,24 @@
         android:layout_height="wrap_content"
         android:padding="30dp">
 
-        <EditText
-            android:id="@+id/emailadmin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:hint="Email Address"
-            android:padding="20dp"/>
-
-        <EditText
-            android:id="@+id/passwordadmin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="Password"
-            android:padding="20dp"/>
-
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/loginadmin"
-            android:id="@+id/loginadmin"
+            android:text="Generate EOD"
+            android:id="@+id/neweod"
             />
+
+        <Button
+            android:id="@+id/task"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View tasks" />
+
+        <Button
+            android:id="@+id/myeod"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My EOD" />
     </LinearLayout>
 
 </ScrollView>

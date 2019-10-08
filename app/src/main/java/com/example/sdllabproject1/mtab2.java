@@ -1,6 +1,6 @@
 package com.example.sdllabproject1;
 
-import android.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,7 +41,8 @@ public class mtab2 extends Fragment {
 
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     ProjectDetails pd = documentSnapshot.toObject(ProjectDetails.class);
-                    if (pd.getStatus().equalsIgnoreCase("Ongoing") && pd.getTeamLead().equalsIgnoreCase((currentUser).toString()))
+                    if(pd.getTeamLead().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()))
+                    if (pd.getStatus().equalsIgnoreCase("Ongoing") )
                         projectList.add(new projectTitles(pd.getTitle(), pd.getDescription(), pd.getTeamLead(), pd.getStatus(), pd.getDate()));
 
                 }

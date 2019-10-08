@@ -7,11 +7,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button buttonregister;
     private EditText email,password,role;
-    private TextView signup;
     private ProgressDialog PD;
     private FirebaseAuth FA;
     private FirebaseFirestore FS;
@@ -48,26 +47,18 @@ public class MainActivity extends AppCompatActivity {
         email=(EditText)findViewById(R.id.loginemail);
         password=(EditText)findViewById(R.id.loginpassword);
         role=(EditText)findViewById(R.id.role);
-        signup=(TextView)findViewById(R.id.textView2);
         buttonregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openactivity4();
             }
         });
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openactivity5();
 
-            }
-        });
     }
     public void openactivity1()
     {
         Intent intent=new Intent(this,adminpage.class);
         startActivity(intent);
-
     }
 
     public void openactivity4()
@@ -108,12 +99,6 @@ public class MainActivity extends AppCompatActivity {
         usermap.put("UserName",username);
         usermap.put("Role",task);
        FS.collection("USERS").document(username).set(usermap);
-
     }
 
-    public void openactivity5()
-    {
-        Intent intent=new Intent(this,login.class);
-        startActivity(intent);
-    }
 }

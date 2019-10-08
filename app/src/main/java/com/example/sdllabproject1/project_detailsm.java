@@ -1,10 +1,8 @@
 package com.example.sdllabproject1;
 
 import android.animation.ObjectAnimator;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -30,14 +28,14 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class project_details extends RecyclerView.Adapter<project_details.ViewHolder> {
+public class project_detailsm extends RecyclerView.Adapter<project_detailsm.ViewHolder> {
 
     private Context mContext;
     private ArrayList<projectTitles> pro_title;
     String role;
     private SparseBooleanArray expandState = new SparseBooleanArray();
 
-    public project_details(Context context, ArrayList<projectTitles> title){
+    public project_detailsm(Context context, ArrayList<projectTitles> title){
         mContext = context;
         pro_title = title;
         for(int i = 0;i<title.size();i++){
@@ -85,26 +83,17 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(mContext, holder.buttonViewOption);
                 //inflating menu from xml resource
-                popup.inflate(R.menu.options_menu);
+                popup.inflate(R.menu.options_menum);
                 //adding click listener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                       //  projectTitles cards=(projectTitles) view.getTag();
                       //  final String value = cards.getDname();
-                String user = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                FirebaseFirestore.getInstance().collection("USERS").document(user).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        final ModelUsers md = task.getResult().toObject(ModelUsers.class);
-                        role = md.getRole();
-                    }
-                });
+
                         switch (item.getItemId()) {
                             case R.id.action_edit:
                                 Intent intent = new Intent(view.getContext(), addProjectForm.class);
-                              //  intent.putExtra("boolea", value);
-                              //  intent.putExtra("title",pro_title.get(position).getDname());
                                 mContext.startActivity(intent);
                                 return true;
                             case R.id.action_delete:
@@ -117,12 +106,11 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
                                             }
                                         });
                                 return true;
+                            case R.id.action_assign:
 
-
-
-
-
-
+                                Intent intent1 = new Intent(view.getContext(), AssignTasksActivity.class);
+                                mContext.startActivity(intent1);
+                                return true;
                             default:
                                 return false;
                         }

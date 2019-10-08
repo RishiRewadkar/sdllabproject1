@@ -30,8 +30,9 @@ public class ManagerActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
-        adapter.addFragment(new admin_fragment(), "Upcoming");
-        adapter.addFragment(new admin_fragment2(), "Ongoing");
+        adapter.addFragment(new mtab1(), "Upcoming");
+        adapter.addFragment(new mtab2(), "Ongoing");
+        adapter.addFragment(new admin_fragment3(),"Done");
 
         viewPager.setAdapter(adapter);
     }
