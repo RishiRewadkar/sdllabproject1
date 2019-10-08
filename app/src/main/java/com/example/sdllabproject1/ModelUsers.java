@@ -3,6 +3,9 @@ package com.example.sdllabproject1;
 public class ModelUsers {
     String Role, UserName;
 
+    public ModelUsers(String userName, String role) {
+    }
+
     public String getRole() {
         return Role;
     }
