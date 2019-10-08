@@ -30,20 +30,41 @@ public class AssignEmployeeActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_employee);
-
+        users = new ArrayList<>();
         setUpRecyclerView();
+
         db = FirebaseFirestore.getInstance();
+        /*FirebaseFirestore.getInstance().collection("Project").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+
+                for(QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots){
+                   ModelUsers mu = documentSnapshot.toObject(ModelUsers.class);
+                    if(mu.getRole().equals("Employee")) {
+                        users.add(mu.getUserName());
+                    }
+                }
+
+            }
+        });
+       */
         db.collection("USERS").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 for (DocumentSnapshot ds : task.getResult()) {
-                    ModelUsers mu = new ModelUsers(ds.getString("UserName"), ds.getString("Role"));
-                    users.add(mu);
+
+                    ModelUsers mu = new ModelUsers(ds.getString("UserName"), ds.getString("role"));
+                    if (mu.getRole().equalsIgnoreCase("Employee")) {
+                        users.add(mu);
+                    }
+
                 }
-                adapter = new RecyclerViewAdapter2(AssignEmployeeActivity.this, users);
-                recyclerView.setAdapter(adapter);
+
+
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
@@ -57,6 +78,11 @@ public class AssignEmployeeActivity extends AppCompatActivity {
 
     private void setUpRecyclerView() {
         recyclerView = findViewById(R.id.rvAE);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setHasFixedSize(true);
+        adapter = new RecyclerViewAdapter2(AssignEmployeeActivity.this, users);
+        recyclerView.setAdapter(adapter);
     }
 }

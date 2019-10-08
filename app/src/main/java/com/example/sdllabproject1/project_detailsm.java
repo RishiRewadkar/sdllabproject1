@@ -108,8 +108,11 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                                 return true;
                             case R.id.action_assign:
 
-                                Intent intent1 = new Intent(view.getContext(), AssignTasksActivity.class);
-                                mContext.startActivity(intent1);
+                                Intent i = new Intent(view.getContext(), addtaskActivity.class);
+                                String strName = holder.title.getText().toString().trim();
+
+                                i.putExtra("str", strName);
+                                mContext.startActivity(i);
                                 return true;
                             default:
                                 return false;

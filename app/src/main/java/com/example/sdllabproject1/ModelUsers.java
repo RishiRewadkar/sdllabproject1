@@ -3,7 +3,15 @@ package com.example.sdllabproject1;
 public class ModelUsers {
     String Role, UserName;
 
+    public ModelUsers() {
+
+    }
+
     public ModelUsers(String userName, String role) {
+    }
+
+    public ModelUsers(String userName) {
+        UserName = userName;
     }
 
     public String getRole() {
