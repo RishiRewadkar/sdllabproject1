@@ -10,6 +10,15 @@
     android:orientation="vertical"
     tools:context=".admin1"
     >
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </androidx.viewpager.widget.ViewPager>
+
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
         android:layout_width="match_parent"
@@ -20,7 +29,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimaryDark"
+            android:background="#FFFFFF"
             android:visibility="visible"
             app:layout_scrollFlags="scroll|enterAlways"
             app:popupTheme="@style/AppTheme.PopupOverlay">
@@ -30,23 +39,15 @@
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
-            android:background="@color/colorPrimaryDark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="30dp"
+            android:background="#00BCD4" />
     </com.google.android.material.appbar.AppBarLayout>
-
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="431dp"
-        android:layout_height="wrap_content">
-
-    </androidx.viewpager.widget.ViewPager>
 
     <include
         layout="@layout/app_bar_employee1"
         android:layout_width="match_parent"
-        android:layout_height="138dp" />
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

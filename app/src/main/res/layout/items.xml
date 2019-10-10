@@ -9,6 +9,7 @@
     android:layout_marginLeft="5dp"
     android:layout_marginTop="5dp"
     android:layout_marginRight="5dp"
+    android:background="#7E2196F3"
     card_view:cardCornerRadius="5dp">
 
     <LinearLayout
@@ -29,17 +30,23 @@
                 android:id="@+id/tv_desc1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp" />
+                android:fontFamily="sans-serif-light"
+                android:textColor="#3F51B5"
+                android:textSize="25sp" />
 
             <TextView
                 android:id="@+id/tv_lead1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-thin"
+                android:textColor="#AEF44336" />
 
             <TextView
                 android:id="@+id/tv_status1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#AEF44336" />
 
 
         </LinearLayout>
@@ -75,7 +82,9 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="5dp"
 
-                />
+                android:fontFamily="@font/averia_gruesa_libre"
+                android:textColor="#2196F3"
+                android:textStyle="bold" />
         </RelativeLayout>
 
 
