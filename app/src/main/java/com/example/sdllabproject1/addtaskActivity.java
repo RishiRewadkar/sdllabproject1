@@ -60,13 +60,20 @@ public class addtaskActivity extends AppCompatActivity implements DatePickerDial
             @Override
             public void onClick(View v) {
                 Map<String, Object> map = new HashMap<>();
-                map.put("TaskTitle", tname.getText().toString().trim());
-                map.put("EmployeeName", ename.getText().toString().trim());
-                map.put("Date", Date);
+                map.put("Titlet", tname.getText().toString().trim());
+                map.put("Employee", ename.getText().toString().trim());
+                map.put("Deadline", Date);
+
+                final Map<String, Object> promap = new HashMap<>();
+                promap.put("Status","Ongoing");
+
                 FirebaseFirestore.getInstance().collection("Project").document(news).collection("tasks").document(tname.getText().toString()).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(addtaskActivity.this, "Assigned", Toast.LENGTH_LONG).show();
+                        FirebaseFirestore.getInstance().collection("Project").document(news).update(promap);
+                        Intent intent = new Intent(addtaskActivity.this,ManagerActivity.class);
+
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

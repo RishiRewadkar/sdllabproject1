@@ -45,18 +45,7 @@ public class eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
         holder.setIsRecyclable(false);
         TextView name = holder.title;
         name.setText(pro_title.get(position).getDname());
-        holder.desc.setText(pro_title.get(position).getDesc());
-
-        final boolean isExpanded = expandState.get(position);
-        holder.expandableLayout.setVisibility(isExpanded?View.VISIBLE:View.GONE);
-
-        holder.buttonLayout.setRotation(expandState.get(position) ? 180f : 0f);
-        holder.buttonLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                onClickButton(holder.expandableLayout, holder.buttonLayout,  position);
-            }
-        });
+       holder.desc.setText(pro_title.get(position).getDesc());
     }
 
     @Override
@@ -72,33 +61,12 @@ public class eod_details extends RecyclerView.Adapter<eod_details.ViewHolder> {
             super(itemView);
 
             title = itemView.findViewById(R.id.tv);
-            desc = itemView.findViewById(R.id.tv_eod);
+            desc = itemView.findViewById(R.id.tvdesc);
 
-            expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout);
-            buttonLayout = (RelativeLayout) itemView.findViewById(R.id.button);
 
 
         }
     }
 
-    private void onClickButton(final LinearLayout expandableLayout, final RelativeLayout buttonLayout, final  int i) {
 
-        //Simply set View to Gone if not expanded
-        //Not necessary but I put simple rotation on button layout
-        if (expandableLayout.getVisibility() == View.VISIBLE){
-            createRotateAnimator(buttonLayout, 180f, 0f).start();
-            expandableLayout.setVisibility(View.GONE);
-            expandState.put(i, false);
-        }else{
-            createRotateAnimator(buttonLayout, 0f, 180f).start();
-            expandableLayout.setVisibility(View.VISIBLE);
-            expandState.put(i, true);
-        }
-    }
-    private ObjectAnimator createRotateAnimator(final View target, final float from, final float to) {
-        ObjectAnimator animator = ObjectAnimator.ofFloat(target, "rotation", from, to);
-        animator.setDuration(300);
-        animator.setInterpolator(new LinearInterpolator());
-        return animator;
-    }
 }

@@ -10,6 +10,7 @@ android:id="@+id/cv"
 android:layout_marginTop="5dp"
 android:layout_marginLeft="5dp"
 android:layout_marginRight="5dp"
+    card_view:cardElevation="@dimen/fab_margin"
 card_view:cardCornerRadius="5dp">
 
         <LinearLayout

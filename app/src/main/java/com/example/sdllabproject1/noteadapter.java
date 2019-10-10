@@ -26,9 +26,10 @@ public class noteadapter extends FirestoreRecyclerAdapter<note,noteadapter.noteh
 
     @Override
     protected void onBindViewHolder(@NonNull noteholder holder, int position, @NonNull note model) {
+
         holder.textViewtitle.setText(model.getTitle());
         holder.textViewdescription.setText(model.getDescription());
-        holder.textViewpriority.setText(String.valueOf(model.getDate()));
+//        holder.textViewpriority.setText(String.valueOf(model.getDate()));
     }
 
     @NonNull
@@ -53,7 +54,6 @@ public class noteadapter extends FirestoreRecyclerAdapter<note,noteadapter.noteh
             super(itemView);
             textViewtitle=itemView.findViewById(R.id.text_view_title);
             textViewdescription=itemView.findViewById(R.id.text_view_description);
-            textViewpriority=itemView.findViewById(R.id.text_view_priority);
         }
     }
 }

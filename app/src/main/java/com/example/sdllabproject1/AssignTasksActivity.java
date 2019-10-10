@@ -2,6 +2,7 @@ package com.example.sdllabproject1;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +25,7 @@ public class AssignTasksActivity extends AppCompatActivity {
     EditText name1, name2, name3;
     EditText task1, task2, task3;
     EditText date1, date2, date3;
+    String title;
     Button save;
     FirebaseAuth firebaseUser;
 
@@ -30,6 +33,8 @@ public class AssignTasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_tasks);
+        Intent i = getIntent();
+        title = i.getExtras().getString("title");
         name1 = (EditText) findViewById(R.id.e1);
         name2 = (EditText) findViewById(R.id.e2);
         name3 = (EditText) findViewById(R.id.e3);
@@ -66,15 +71,24 @@ public class AssignTasksActivity extends AppCompatActivity {
                 map.put("date2", date2.getText().toString().trim());
                 map.put("date3", date3.getText().toString().trim());
 
-
+                final Map<String,String> userMap = new HashMap<>();
+                userMap.put("Status","Ongoing");
                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                 // add entry to firestore
-                FirebaseFirestore.getInstance().collection("Project").document(String.valueOf(firebaseUser)).collection("tasks").document().set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                Log.d("titlelll", "onClick: "+title);
+                FirebaseFirestore.getInstance().collection("Project").document(title).collection("tasks").document(title).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
+                       FirebaseFirestore.getInstance().collection("Project").document(title).set(userMap, SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
+                           @Override
+                           public void onSuccess(Void aVoid) {
+
+                           }
+                       });
                         Toast.makeText(AssignTasksActivity.this, "Project assigned", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(AssignTasksActivity.this, ManagerActivity.class);
                         startActivity(intent);
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

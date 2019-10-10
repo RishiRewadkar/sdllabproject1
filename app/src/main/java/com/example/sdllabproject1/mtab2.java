@@ -49,7 +49,7 @@ public class mtab2 extends Fragment {
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
                 final RecyclerView.LayoutManager rvLiLayoutManager = layoutManager;
                 recyclerView.setLayoutManager(rvLiLayoutManager);
-                project_details dom = new project_details(getActivity(), projectList);
+                project_detailsm dom = new project_detailsm(getActivity(), projectList);
                 recyclerView.setAdapter(dom);
             }
         });
@@ -58,23 +58,3 @@ public class mtab2 extends Fragment {
 }
 
 
-/*package com.example.sdllabproject1;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
-public class mtab2 extends Fragment {
-    public mtab2() {
-    }
-
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view=inflater.inflate(R.layout.manager_tab2,container,false);
-        return  view;
-    }
-}
-*/

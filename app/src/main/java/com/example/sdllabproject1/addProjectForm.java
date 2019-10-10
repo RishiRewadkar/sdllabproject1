@@ -32,9 +32,8 @@ import java.util.Map;
 public class addProjectForm extends AppCompatActivity  implements DatePickerDialog.OnDateSetListener{
 
 
-    Intent intent = getIntent();
   //  String state = intent.getStringExtra("boolea");
-   // String titlev = intent.getStringExtra("title");
+    String titlev ;
 
     TextView submit;
     EditText name;
@@ -47,7 +46,8 @@ public class addProjectForm extends AppCompatActivity  implements DatePickerDial
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.add_project_form);
         super.onCreate(savedInstanceState);
-
+       // Intent intent = getIntent();
+       // titlev = intent.getStringExtra("title");
         submit = (TextView)findViewById(R.id.Submit);
         name = (EditText) findViewById(R.id.title);
         desc = (EditText) findViewById(R.id.desc);
@@ -67,7 +67,7 @@ public class addProjectForm extends AppCompatActivity  implements DatePickerDial
         status.setAdapter(deptAdapter);
 
         submit.setEnabled(true);
-     /*   if(state.equals("true")){
+     /*  if(!titlev.isEmpty()){
             FirebaseFirestore.getInstance().collection("Project").document(titlev).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {

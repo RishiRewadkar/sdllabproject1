@@ -22,7 +22,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 public class newnoteactivity extends AppCompatActivity {
@@ -103,12 +105,18 @@ public class newnoteactivity extends AppCompatActivity {
             Toast.makeText(newnoteactivity.this,"Please enter title and description",Toast.LENGTH_SHORT).show();
             return;
         }
+        Date c = Calendar.getInstance().getTime();
+        System.out.println("Current time => " + c);
+
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String formattedDate = df.format(c);
+
         HashMap<String,String> map =  new HashMap<>();
-        map.put("Date",date);
+        map.put("Date",formattedDate);
         map.put("Description",description);
         map.put("Title",title);
         CollectionReference notebookref= FirebaseFirestore.getInstance().collection("USERS");
-        notebookref.document(fa.getCurrentUser().getEmail().toString()).collection("EOD").document(date).set(map);
+        notebookref.document(fa.getCurrentUser().getEmail().toString()).collection("EOD").document(formattedDate).set(map);
      //   notebookref.add(new note(title,description,priority));
         Toast.makeText(newnoteactivity.this,"note added",Toast.LENGTH_SHORT).show();
         finish();

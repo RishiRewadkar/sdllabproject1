@@ -72,7 +72,7 @@ public class login extends AppCompatActivity {
 
                                                     switch(desig){
                                                         case "Admin":
-                                                            Intent intent=new Intent(login.this,admin1.class);
+                                                            Intent intent=new Intent(login.this,adminMenu.class);
                                                             startActivity(intent);
                                                             break;
                                                         case "Manager":

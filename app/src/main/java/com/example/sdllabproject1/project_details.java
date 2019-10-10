@@ -51,19 +51,28 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view =  layoutInflater.inflate(R.layout.info,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
+       String tlead = "Team Lead : ";
         holder.setIsRecyclable(false);
         projectTitles item=pro_title.get(position);
         holder.title.setTag(item);
         TextView name = holder.title;
         name.setText(pro_title.get(position).getDname());
         holder.desc.setText(pro_title.get(position).getDesc());
-        holder.lead.setText(pro_title.get(position).getLead());
+        holder.lead.setText(tlead + pro_title.get(position).getLead());
         holder.stat.setText(pro_title.get(position).getDate());
 
         final boolean isExpanded = expandState.get(position);
@@ -104,7 +113,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
                             case R.id.action_edit:
                                 Intent intent = new Intent(view.getContext(), addProjectForm.class);
                               //  intent.putExtra("boolea", value);
-                              //  intent.putExtra("title",pro_title.get(position).getDname());
+                                intent.putExtra("title",pro_title.get(position).getDname());
                                 mContext.startActivity(intent);
                                 return true;
                             case R.id.action_delete:
@@ -117,12 +126,6 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
                                             }
                                         });
                                 return true;
-
-
-
-
-
-
                             default:
                                 return false;
                         }

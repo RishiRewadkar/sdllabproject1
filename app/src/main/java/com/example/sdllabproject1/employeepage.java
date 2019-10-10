@@ -23,6 +23,7 @@ public class employeepage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_employeepage);
         myeod = findViewById(R.id.myeod);
@@ -46,7 +47,7 @@ public class employeepage extends AppCompatActivity {
         task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(employeepage.this,adminMenu.class);
+                Intent intent1 = new Intent(employeepage.this,adminEOD.class);
                 startActivity(intent1);
             }
         });

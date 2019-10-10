@@ -28,44 +28,21 @@ card_view:cardCornerRadius="5dp">
                 android:id="@+id/tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="30sp"
                 android:layout_marginLeft="50dp"
                 android:layout_marginTop="5dp"
 
                 />
-            <RelativeLayout
-                android:id="@+id/button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="end"
-                android:gravity="center">
-
-                <View
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:background="@drawable/dropdown" />
-            </RelativeLayout>
-            </RelativeLayout>
-
-            <LinearLayout
-                android:id="@+id/expandableLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
                 <TextView
-                    android:id="@+id/tv_eod"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/tvdesc"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp" />
+                    android:layout_marginLeft="50dp"
+                    android:layout_marginTop="5dp"
 
+                    />
 
-            </LinearLayout>
-
-
-
-
-
-
+            </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

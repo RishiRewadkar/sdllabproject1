@@ -8,62 +8,42 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 public class managerpage extends AppCompatActivity {
-    EditText email, password;
-    Button login;
-    private FirebaseAuth firebaseAuth;
+    private Button proj, eod;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        setContentView(R.layout.admin_menu);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_managerpage);
-
-        getSupportActionBar().setTitle("Admin login");
-        email = (EditText) findViewById(R.id.emailadmin);
-        password = (EditText) findViewById(R.id.passwordadmin);
-        login = (Button) findViewById(R.id.loginadmin);
-        firebaseAuth = FirebaseAuth.getInstance();
-        login.setOnClickListener(new View.OnClickListener() {
-
+        proj = findViewById(R.id.project);
+        eod = findViewById(R.id.eod);
+        proj.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = email.getText().toString().trim();
-                String epassword = password.getText().toString().trim();
-
-                if (TextUtils.isEmpty(username)) {
-                    Toast.makeText(managerpage.this, "Please Enter Email ID", Toast.LENGTH_LONG);
-                    return;
-                }
-                if (TextUtils.isEmpty(epassword)) {
-                    Toast.makeText(managerpage.this, "Please Enter Password", Toast.LENGTH_LONG);
-                    return;
-                }
-
-
-                //firebaseAuth.signInWithEmailAndPassword(username, epassword)
-
-                //.addOnCompleteListener(adminpage.this, new OnCompleteListener<AuthResult>() {
-                            /*@Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {*/
-
-                Intent intent = new Intent(managerpage.this, ManagerActivity.class);
-                startActivity(intent);
-
-                               /* } else {
-                                    Toast.makeText(adminpage.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                        });*/
-
-
+                button1();
             }
         });
+
+        eod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                button2();
+            }
+        });
+    }
+
+    public void button2() {
+        Intent intent = new Intent(this,adminEOD.class);
+        startActivity(intent);
+    }
+
+    public void button1(){
+        Intent intent = new Intent(this, admin1.class);
+        startActivity(intent);
     }
 }

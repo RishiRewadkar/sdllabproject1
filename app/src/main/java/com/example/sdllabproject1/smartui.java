@@ -44,6 +44,9 @@ public class smartui extends AppCompatActivity {
     }
     private void  setuprecyclerview()
     {
+      String erole = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+
         Query query=NBR.document(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()).collection("EOD").orderBy("Date");
        FirestoreRecyclerOptions<note> options=new FirestoreRecyclerOptions.Builder<note>().setQuery(query,note.class).build();
 
