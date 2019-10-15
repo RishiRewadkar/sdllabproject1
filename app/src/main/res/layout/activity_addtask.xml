@@ -9,7 +9,10 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        android:padding="16dp"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-
+                android:textSize="25sp"
                 android:hint="Task Title" />
 
 
@@ -32,22 +35,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
-
+                android:textSize="25sp"
                 android:hint="Employee name" />
 
             <Button
                 android:id="@+id/DatePicker2"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Date" />
+                android:text="Pick a Date"
+                android:background="#40BBB1"
+                android:textColor="#FFFFFF"
+                android:layout_margin="16dp"
+                android:textSize="25sp"
+                />
 
             <Button
                 android:id="@+id/submit"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="submit" />
+                android:text="submit"
+                android:background="#408FBB"
+                android:textColor="#FFFFFF"
+                android:layout_margin="16dp"
+                android:textSize="25sp"
+                />
 
 
         </LinearLayout>

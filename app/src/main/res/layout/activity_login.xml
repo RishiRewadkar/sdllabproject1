@@ -17,37 +17,6 @@
 
         android:padding="30dp">
 
-        <Button
-            android:id="@+id/loginadmin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#408FBB"
-            android:text="@string/loginadmin"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp" />
-
-        <EditText
-            android:id="@+id/passwordadmin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="20dp"
-            android:textColor="#FFFFFF"
-            android:textColorHighlight="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
-
-        <EditText
-            android:id="@+id/emailadmin"
-            android:inputType="textEmailAddress"
-            android:padding="20dp"
-            android:textColor="#FFFFFF"
-
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email Address"
-            android:textColorHighlight="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
 
         <TextView
             android:id="@+id/text"
@@ -62,6 +31,44 @@
             android:textSize="40sp"
             android:textStyle="bold" />
 
+        <EditText
+            android:id="@+id/emailadmin"
+            android:inputType="textEmailAddress"
+            android:padding="20dp"
+            android:textColor="#FFFFFF"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email Address"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
+
+
+        <EditText
+            android:id="@+id/passwordadmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="20dp"
+            android:textColor="#FFFFFF"
+            android:textColorHighlight="#FFFFFF"
+            android:textColorHint="#FFFFFF" />
+
+
+
+
+
+        <Button
+            android:id="@+id/loginadmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#408FBB"
+            android:text="@string/loginadmin"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp" />
+
+
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
@@ -75,6 +82,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/buttonregister" />
+
+
+
 
     </LinearLayout>
 

@@ -11,13 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
         <activity
             android:name=".newnoteactivity"
             android:parentActivityName=".smartui" />
         <activity
             android:name=".smartui"
             android:launchMode="singleTop" />
-        <activity android:name=".login">
+        <activity android:name=".welcome">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,7 +35,6 @@
         <activity android:name=".employeepage" />
         <activity android:name=".addProjectForm" />
         <activity android:name=".adminEOD" />
-
         <activity android:name=".MainActivity" />
 
         <meta-data
