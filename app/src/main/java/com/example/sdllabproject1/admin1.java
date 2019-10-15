@@ -27,7 +27,7 @@ public class admin1 extends AppCompatActivity {
         setContentView(R.layout.activity_admin);
 
         tabAdapter = new TabAdapter(getSupportFragmentManager());
-        viewPager = findViewById(R.id.container);
+        viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         TabLayout tabLayout = findViewById(R.id.tabs);

@@ -2,16 +2,11 @@ package com.example.sdllabproject1;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.firebase.auth.FirebaseAuth;
 
 public class managerpage extends AppCompatActivity {
     private Button proj, eod;
@@ -38,7 +33,7 @@ public class managerpage extends AppCompatActivity {
     }
 
     public void button2() {
-        Intent intent = new Intent(this,adminEOD.class);
+        Intent intent = new Intent(this, employeeTask.class);
         startActivity(intent);
     }
 

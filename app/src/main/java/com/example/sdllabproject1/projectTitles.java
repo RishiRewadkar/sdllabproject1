@@ -10,11 +10,17 @@ public class projectTitles {
         this.stat = stat;
         this.date = date;
     }
-    public projectTitles(String dname,String desc) {
+    public projectTitles(String title, String dname, String desc,String stat) {
         this.dname = dname;
         this.desc = desc;
-        lead = "hi";
-        stat = "hey";
+
+        this.lead = title;
+        this.stat = stat;
+    }
+
+    public projectTitles(String title,String dname) {
+        this.dname = title;
+        this.desc = dname;
     }
 
     public String getDname() {

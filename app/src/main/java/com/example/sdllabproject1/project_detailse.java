@@ -1,19 +1,20 @@
 package com.example.sdllabproject1;
 
 import android.animation.ObjectAnimator;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.util.SparseBooleanArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,35 +28,83 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class project_details extends RecyclerView.Adapter<project_details.ViewHolder> {
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+
+public class project_detailse extends RecyclerView.Adapter<project_detailse.ViewHolder> {
 
     private Context mContext;
     private ArrayList<projectTitles> pro_title;
-    String role;
+    TextView taskname, projectname, taskdesc;
+    PopupWindow popupWindow;
+    String role,td,tn,pn;
     private SparseBooleanArray expandState = new SparseBooleanArray();
 
-    public project_details(Context context, ArrayList<projectTitles> title){
+    public project_detailse(Context context, ArrayList<projectTitles> title){
         mContext = context;
         pro_title = title;
         for(int i = 0;i<title.size();i++){
             expandState.append(i,false);
         }
     }
-
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-        View view =  layoutInflater.inflate(R.layout.info,parent,false);
+    public ViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
+      final  LayoutInflater layoutInflater = LayoutInflater.from(mContext);
+        final View view =  layoutInflater.inflate(R.layout.info,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         view.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view1) {
+                LayoutInflater inflater = (LayoutInflater)
+                        view1.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                View popupView = inflater.inflate(R.layout.popup_task, null);
 
+                // create the popup window
+                int width = 700;
+                int height = 550;
+                boolean focusable = true; // lets taps outside the popup also dismiss it
+
+                projectname = popupView.findViewById(R.id.projectname);
+                taskname = popupView.findViewById(R.id.taskname);
+                taskdesc = popupView.findViewById(R.id.taskdesc);
+
+               final TextView textView = view.findViewById(R.id.tv);
+                FirebaseFirestore.getInstance().collection("USERS").document(FirebaseAuth.getInstance().getCurrentUser().getEmail()).collection("tasks").get().
+                        addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                                 @Override
+                                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                     for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+                                                         task pd = documentSnapshot.toObject(task.class);
+                                                         if(pd.getTaskname().equals(textView.getText().toString()))
+                                                         taskdesc.setText(pd.getTaskdesc());
+                                                         projectname.setText(pd.getProjectname());
+                                                     }
+                                                 }
+
+            });
+                taskname.setText(textView.getText().toString());
+
+
+                final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                // show the popup window
+                // which view you pass in doesn't matter, it is only used for the window tolken
+                popupWindow.showAtLocation(view1, Gravity.CENTER, 0, 0);
+
+                // dismiss the popup window when touched
+                popupView.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        popupWindow.dismiss();
+                        return true;
+                    }
+                });
             }
         });
 
@@ -74,7 +123,6 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
         holder.desc.setText(pro_title.get(position).getDesc());
         holder.lead.setText(tlead + pro_title.get(position).getLead());
         holder.stat.setText(pro_title.get(position).getDate());
-
         final boolean isExpanded = expandState.get(position);
         holder.expandableLayout.setVisibility(isExpanded?View.VISIBLE:View.GONE);
 
@@ -94,7 +142,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(mContext, holder.buttonViewOption);
                 //inflating menu from xml resource
-                popup.inflate(R.menu.options_menu);
+                popup.inflate(R.menu.options_menue);
                 //adding click listener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
@@ -110,27 +158,12 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
                     }
                 });
                         switch (item.getItemId()) {
-                            case R.id.action_edit:
-                                Intent intent = new Intent(view.getContext(), addProjectForm.class);
-                              //  intent.putExtra("boolea", value);
-                                intent.putExtra("title",pro_title.get(position).getDname());
+                            case R.id.action_eod:
+                                Intent intent = new Intent(view.getContext(), newnoteactivity.class);
+                                intent.putExtra("project",pro_title.get(position).getDname());
+                                intent.putExtra("task",pro_title.get(position).getLead());
                                 mContext.startActivity(intent);
-                                return true;
-                            case R.id.action_delete:
-                                FirebaseFirestore.getInstance().collection("Project").document(pro_title.get(position).getDname()).delete()
-                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                            @Override
-                                            public void onSuccess(Void aVoid) {
-                                                Toast.makeText(mContext,"Deleted!",Toast.LENGTH_LONG);
 
-                                            }
-                                        });
-                                return true;
-                            case R.id.action_show:
-                                Intent intent1 = new Intent(view.getContext(), ViewReport.class);
-                                //  intent.putExtra("boolea", value);
-
-                                mContext.startActivity(intent1);
                                 return true;
                             default:
                                 return false;
@@ -155,6 +188,7 @@ public class project_details extends RecyclerView.Adapter<project_details.ViewHo
         TextView title,desc,lead,stat,buttonViewOption;
         public RelativeLayout buttonLayout;
         public LinearLayout expandableLayout;
+
         Button but;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

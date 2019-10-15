@@ -4,14 +4,17 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.util.SparseBooleanArray;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.PopupMenu;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,10 +31,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
+import static android.content.Context.LAYOUT_INFLATER_SERVICE;
+import static androidx.constraintlayout.solver.widgets.ConstraintWidget.GONE;
+
 public class project_detailsm extends RecyclerView.Adapter<project_detailsm.ViewHolder> implements View.OnClickListener {
 
     private Context mContext;
     private ArrayList<projectTitles> pro_title;
+    String status;
+    TextView projecttitle,prodesc,prolead;
+    Button viewtask,report;
+    String pt,pdesc,pl;
     String role;
     ItemClickListener itemClickListener;
     private SparseBooleanArray expandState = new SparseBooleanArray();
@@ -51,6 +61,57 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
         View view =  layoutInflater.inflate(R.layout.info,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
         parent.setOnClickListener(this);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    LayoutInflater inflater = (LayoutInflater)
+                            view.getContext().getSystemService(LAYOUT_INFLATER_SERVICE);
+                    View popupView = inflater.inflate(R.layout.popup_project, null);
+
+                    // create the popup window
+                    int width = 700;
+                    int height = 550;
+                    boolean focusable = true; // lets taps outside the popup also dismiss it
+
+                    projecttitle = popupView.findViewById(R.id.projecttitle);
+                    prodesc = popupView.findViewById(R.id.prodesc);
+                    prolead = popupView.findViewById(R.id.prolead);
+
+                    viewtask = popupView.findViewById(R.id.bview);
+                    report = popupView.findViewById(R.id.breport);
+
+                    projecttitle.setText(pt);
+                    prodesc.setText(pdesc);
+                    prolead.setText(pl);
+
+                    final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+                    // show the popup window
+                    // which view you pass in doesn't matter, it is only used for the window tolken
+                    popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+                    // dismiss the popup window when touched
+                    popupView.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            popupWindow.dismiss();
+                            return true;
+                        }
+                    });
+
+                    viewtask.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent intent = new Intent(view.getContext(), employeeTask.class);
+                            intent.putExtra("title",pt);
+                            mContext.startActivity(intent);
+                        }
+                    });
+                }
+            });
+
+
         return viewHolder;
     }
 
@@ -62,10 +123,10 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
         holder.title.setTag(item);
         TextView name = holder.title;
         name.setText(pro_title.get(position).getDname());
-        holder.desc.setText(pro_title.get(position).getDesc());
-        holder.lead.setText(pro_title.get(position).getLead());
-        holder.stat.setText(pro_title.get(position).getDate());
-
+        status = pro_title.get(position).getStat();
+        pt = pro_title.get(position).getDname();
+        pdesc = pro_title.get(position).getDesc();
+        pl = pro_title.get(position).getLead();
         final boolean isExpanded = expandState.get(position);
         holder.expandableLayout.setVisibility(isExpanded?View.VISIBLE:View.GONE);
 
@@ -76,6 +137,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                 onClickButton(holder.expandableLayout, holder.buttonLayout,  position);
             }
         });
+
 
         holder.buttonViewOption.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,7 +223,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title,desc,lead,stat,buttonViewOption;
         public RelativeLayout buttonLayout;
-        public LinearLayout expandableLayout;
+        public LinearLayout expandableLayout,buttonll;
         Button but;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -174,6 +236,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
             but = itemView.findViewById(R.id.selectButton);
             expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout);
             buttonLayout = (RelativeLayout) itemView.findViewById(R.id.button);
+            buttonll = itemView.findViewById(R.id.buttonll);
 
 
         }

@@ -34,7 +34,7 @@ public class adminMenu extends AppCompatActivity {
     }
 
     public void button2() {
-        Intent intent = new Intent(this,adminEOD.class);
+        Intent intent = new Intent(this, employeeTask.class);
         startActivity(intent);
     }
 

@@ -2,18 +2,13 @@ package com.example.sdllabproject1;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class employeepage extends AppCompatActivity {
@@ -47,8 +42,10 @@ public class employeepage extends AppCompatActivity {
         task.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent1 = new Intent(employeepage.this,adminEOD.class);
-                startActivity(intent1);
+                employee1 fragment1 = new employee1();
+                FragmentTransaction ft1 = getSupportFragmentManager().beginTransaction();
+                ft1.replace(R.id.content, fragment1, "");
+                ft1.commit();
             }
         });
     }

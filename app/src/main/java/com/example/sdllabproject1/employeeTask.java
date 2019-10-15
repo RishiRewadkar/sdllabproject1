@@ -1,11 +1,12 @@
 package com.example.sdllabproject1;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,43 +18,39 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class adminEOD extends AppCompatActivity {
-
+public class employeeTask extends AppCompatActivity {
     RecyclerView recyclerView;
+    String title;
+    CardView cv;
     public ArrayList<projectTitles> taskList;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         setContentView(R.layout.admin_read_eod);
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        title = intent.getExtras().getString("title");
         getSupportActionBar().setTitle("Admin eod");
-
+        cv = findViewById(R.id.cv);
         recyclerView = findViewById(R.id.rveod);
         taskList = new ArrayList<>();
         final String emailuser = FirebaseAuth.getInstance().getCurrentUser().getEmail().toString();
         Log.d("emailele", "onCreate: "+emailuser);
-        FirebaseFirestore.getInstance().collection("Project").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        FirebaseFirestore.getInstance().collection("Project").document(title).collection("tasks").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                String eml = emailuser;
-                for (final QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                   final ProjectDetails eod = documentSnapshot.toObject(ProjectDetails.class);
-                   FirebaseFirestore.getInstance().collection("Project").document(eod.getTitle()).collection("tasks").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                       @Override
-                       public void onSuccess(QuerySnapshot queryDocumentSnapshot) {
-                            for(final QueryDocumentSnapshot ds : queryDocumentSnapshot){
-                                task t = ds.toObject(task.class);
-                                Log.d("emailll", "onSuccess: "+emailuser+t.getEmployee());
-                                if(!t.getEmployee().equals(null) && t.getEmployee().equals(emailuser)){
-                                    taskList.add(new projectTitles(eod.getTitle(),t.getTitlet()));
-                                }
-                            }
-                           Log.d("in", "onSuccess: "+taskList);
 
-                           Log.d("out", "onSuccess: "+taskList);
-                           LinearLayoutManager layoutManager = new LinearLayoutManager(adminEOD.this);
+                for (final QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
+
+                                taskm t = documentSnapshot.toObject(taskm.class);
+                               Log.d("emailll", "onSuccess: "+emailuser+t.getEmployee());
+
+                                    taskList.add(new projectTitles(t.getTitlet(),t.getDescription(),t.getStatus(),title));
+
+                            }
+                           LinearLayoutManager layoutManager = new LinearLayoutManager(employeeTask.this);
                            final RecyclerView.LayoutManager rvLiLayoutManager = layoutManager;
                            recyclerView.setLayoutManager(rvLiLayoutManager);
-                           eod_details dom = new eod_details(adminEOD.this, taskList);
+                           eod_details dom = new eod_details(employeeTask.this, taskList);
                            recyclerView.setAdapter(dom);
 
                        }
@@ -61,6 +58,6 @@ public class adminEOD extends AppCompatActivity {
                    });
                 }
             }
-        });
-    }
-}
+
+
+

@@ -28,6 +28,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DashboardActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ManagerActivity" />
         <activity android:name=".addtaskActivity" />
         <activity android:name=".viewEOD" />
@@ -37,9 +44,10 @@
         <activity android:name=".adminpage" />
         <activity android:name=".employeepage" />
         <activity android:name=".addProjectForm" />
-        <activity android:name=".adminEOD" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".employeeTask" />
 
+        <activity android:name=".MainActivity" />
+        <activity android:name=".login"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -8,16 +8,9 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:background="@drawable/blue"
     tools:context=".admin1"
     >
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </androidx.viewpager.widget.ViewPager>
-
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar"
@@ -25,29 +18,33 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#FFFFFF"
-            android:visibility="visible"
-            app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
 
-
-        </androidx.appcompat.widget.Toolbar>
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="#00BCD4" />
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            />
     </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="431dp"
+        android:layout_height="wrap_content">
+
+    </androidx.viewpager.widget.ViewPager>
 
     <include
         layout="@layout/app_bar_employee1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="138dp" />
 
 
 </LinearLayout>

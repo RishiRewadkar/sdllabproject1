@@ -39,7 +39,6 @@ public class mtab3 extends Fragment {
         FirebaseFirestore.getInstance().collection("Project").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
                     ProjectDetails pd = documentSnapshot.toObject(ProjectDetails.class);
                     if(pd.getTeamLead().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString()))

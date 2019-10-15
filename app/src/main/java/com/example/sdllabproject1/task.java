@@ -1,29 +1,32 @@
 package com.example.sdllabproject1;
 
 public class task {
-    String Deadline,Employee,Titlet;
+    String taskname;
+    String projectname;
 
-    public String getDeadline() {
-        return Deadline;
+    public String getTaskdesc() {
+        return taskdesc;
     }
 
-    public void setDeadline(String deadline) {
-        this.Deadline = deadline;
+    public void setTaskdesc(String taskdesc) {
+        this.taskdesc = taskdesc;
     }
 
-    public String getEmployee() {
-        return Employee;
+    String taskdesc;
+
+    public String getTaskname() {
+        return taskname;
     }
 
-    public void setEmployee(String employee) {
-        this.Employee = employee;
+    public void setTaskname(String taskname) {
+        this.taskname = taskname;
     }
 
-    public String getTitlet() {
-        return Titlet;
+    public String getProjectname() {
+        return projectname;
     }
 
-    public void setTitlet(String titlet) {
-        this.Titlet = titlet;
+    public void setProjectname(String projectname) {
+        this.projectname = projectname;
     }
 }

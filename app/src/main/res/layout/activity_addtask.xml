@@ -38,6 +38,14 @@
                 android:textSize="25sp"
                 android:hint="Employee name" />
 
+            <EditText
+                android:id="@+id/tdesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+
+                android:hint="Task Description" />
+
             <Button
                 android:id="@+id/DatePicker2"
                 android:layout_width="match_parent"

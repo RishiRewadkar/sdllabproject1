@@ -70,7 +70,8 @@ public class addProjectForm extends AppCompatActivity  implements DatePickerDial
      /*  if(!titlev.isEmpty()){
             FirebaseFirestore.getInstance().collection("Project").document(titlev).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                public void onComplete(@NonNull Task<DocumentSnapshot> tas
+                k) {
                     final ProjectDetails pd = task.getResult().toObject(ProjectDetails.class);
                     title = pd.getTitle();
                     descr = pd.getDescription();

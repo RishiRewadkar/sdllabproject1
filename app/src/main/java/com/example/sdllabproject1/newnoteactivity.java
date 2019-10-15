@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -33,11 +34,15 @@ public class newnoteactivity extends AppCompatActivity {
     private NumberPicker numberPickerpriority;
     FirebaseAuth fa;
     String date;
+    String notepro,notetask;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TextView mdisplaydate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        notepro = intent.getExtras().getString("project");
+        notetask = intent.getExtras().getString("task");
         setContentView(R.layout.activity_newnoteactivity);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
         setTitle("MAKE EOD REPORT");
@@ -115,8 +120,8 @@ public class newnoteactivity extends AppCompatActivity {
         map.put("Date",formattedDate);
         map.put("Description",description);
         map.put("Title",title);
-        CollectionReference notebookref= FirebaseFirestore.getInstance().collection("USERS");
-        notebookref.document(fa.getCurrentUser().getEmail().toString()).collection("EOD").document(formattedDate).set(map);
+        CollectionReference notebookref= FirebaseFirestore.getInstance().collection("Project");
+        notebookref.document(notepro).collection("tasks").document(notetask).set(map);
      //   notebookref.add(new note(title,description,priority));
         Toast.makeText(newnoteactivity.this,"note added",Toast.LENGTH_SHORT).show();
         finish();
