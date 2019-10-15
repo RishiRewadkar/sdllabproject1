@@ -1,9 +1,11 @@
 package com.example.sdllabproject1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -29,8 +31,8 @@ public class mtab3 extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.manager_tab2, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.rvM2);
+        View view = inflater.inflate(R.layout.manager_tab3, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.rvM3);
         projectList = new ArrayList<>();
         currentUser = FirebaseAuth.getInstance();
 
@@ -48,10 +50,11 @@ public class mtab3 extends Fragment {
                 LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
                 final RecyclerView.LayoutManager rvLiLayoutManager = layoutManager;
                 recyclerView.setLayoutManager(rvLiLayoutManager);
-                project_details dom = new project_details(getActivity(), projectList);
+                project_detailsm dom = new project_detailsm(getActivity(), projectList);
                 recyclerView.setAdapter(dom);
             }
         });
+
         return view;
     }
 }

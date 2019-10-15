@@ -32,7 +32,7 @@ public class ManagerActivity extends AppCompatActivity {
         TabAdapter adapter = new TabAdapter(getSupportFragmentManager());
         adapter.addFragment(new mtab1(), "Upcoming");
         adapter.addFragment(new mtab2(), "Ongoing");
-        adapter.addFragment(new admin_fragment3(),"Done");
+        adapter.addFragment(new mtab3(), "Done");
 
         viewPager.setAdapter(adapter);
     }

@@ -2,6 +2,7 @@ package com.example.sdllabproject1;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.content.Intent;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        View view = LayoutInflater.from(mcontxt).inflate(R.layout.items, parent, false);
+        View view = LayoutInflater.from(mcontxt).inflate(R.layout.info, parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
@@ -59,12 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 onClickButton(holder.expandableLayout, holder.buttonLayout, position);
             }
         });
-        holder.b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //// WRITE CODE HEREEEEEEES
-            }
-        });
+
     }
 
     @Override
@@ -94,7 +91,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return animator;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
 
         public RelativeLayout buttonLayout;
         public LinearLayout expandableLayout;
@@ -103,6 +100,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
             title = itemView.findViewById(R.id.tv1);
             desc = itemView.findViewById(R.id.tv_desc1);
             lead = itemView.findViewById(R.id.tv_lead1);
@@ -110,6 +108,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             b = (Button) itemView.findViewById(R.id.selectButton);
             expandableLayout = (LinearLayout) itemView.findViewById(R.id.expandableLayout1);
             buttonLayout = (RelativeLayout) itemView.findViewById(R.id.buttonnew);
+
         }
     }
 }

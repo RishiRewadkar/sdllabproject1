@@ -28,11 +28,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 
-public class project_detailsm extends RecyclerView.Adapter<project_detailsm.ViewHolder> {
+public class project_detailsm extends RecyclerView.Adapter<project_detailsm.ViewHolder> implements View.OnClickListener {
 
     private Context mContext;
     private ArrayList<projectTitles> pro_title;
     String role;
+    ItemClickListener itemClickListener;
     private SparseBooleanArray expandState = new SparseBooleanArray();
 
     public project_detailsm(Context context, ArrayList<projectTitles> title){
@@ -49,6 +50,7 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         View view =  layoutInflater.inflate(R.layout.info,parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
+        parent.setOnClickListener(this);
         return viewHolder;
     }
 
@@ -92,8 +94,11 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                       //  final String value = cards.getDname();
 
                         switch (item.getItemId()) {
-                            case R.id.action_edit:
-                                Intent intent = new Intent(view.getContext(), addProjectForm.class);
+                            case R.id.action_viewReport:
+                                Intent intent = new Intent(view.getContext(), ViewReport.class);
+                                String strname = holder.title.getText().toString().trim();
+
+                                intent.putExtra("strurl", strname);
                                 mContext.startActivity(intent);
                                 return true;
                             case R.id.action_delete:
@@ -114,6 +119,20 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
                                 i.putExtra("str", strName);
                                 mContext.startActivity(i);
                                 return true;
+                            case R.id.action_submit:
+
+                                Intent i2 = new Intent(view.getContext(), submitActivity.class);
+                                String strName2 = holder.title.getText().toString().trim();
+                                String strName3 = holder.desc.getText().toString().trim();
+                                String strName4 = holder.lead.getText().toString().trim();
+                                String strName5 = holder.stat.getText().toString().trim();
+                                String strName6 = holder.title.getText().toString().trim();
+                                i2.putExtra("str", strName2);
+                                i2.putExtra("str1", strName3);
+                                i2.putExtra("str2", strName4);
+                                i2.putExtra("str3", strName5);
+                                mContext.startActivity(i2);
+                                return true;
                             default:
                                 return false;
                         }
@@ -132,6 +151,12 @@ public class project_detailsm extends RecyclerView.Adapter<project_detailsm.View
     public int getItemCount() {
         return pro_title.size();
     }
+
+    @Override
+    public void onClick(View v) {
+//this.itemClickListener.onItemClick(v);
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title,desc,lead,stat,buttonViewOption;
